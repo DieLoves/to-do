@@ -16,6 +16,7 @@ export interface Section {
 	id: string;
 	title: string;
 	color: string;
+	sort: number;
 }
 
 export interface TodoState {
@@ -33,7 +34,10 @@ export type TodoAction =
 	| { type: 'TOGGLE_TASK'; payload: { id: string } }
 	| { type: 'DELETE_TASK'; payload: { id: string } }
 	| { type: 'UPDATE_TASK'; payload: { id: string; updates: Partial<Task> } }
-	| { type: 'ADD_SECTION'; payload: { title: string; color: string } }
+	| {
+			type: 'ADD_SECTION';
+			payload: { title: string; color: string; sort: number };
+	  }
 	| { type: 'DELETE_SECTION'; payload: { id: string } }
 	| { type: 'SET_FILTER'; payload: { filter: Filter } }
 	| { type: 'SET_SEARCH_QUERY'; payload: { query: string } }

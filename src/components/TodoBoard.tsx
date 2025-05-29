@@ -9,6 +9,12 @@ export default function TodoBoard() {
 	const { state } = useTodo();
 	const filteredTasks = useFilteredTasks();
 
+	const sectionsSort = useMemo(() => {
+		return state.sections.sort((a, b) => {
+			return a.sort - b.sort;
+		});
+	}, [state.sections]);
+
 	const tasksBySection = useMemo(() => {
 		return state.sections.reduce((acc, section) => {
 			acc[section.id] = filteredTasks.filter(
@@ -19,15 +25,15 @@ export default function TodoBoard() {
 	}, [filteredTasks, state.sections]);
 
 	return (
-		<div className='grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-start'>
-			{state.sections.map(section => (
+		<div className='flex gap-6 md:flex-col lg:flex-row'>
+			{sectionsSort.map(section => (
 				<TodoSection
 					key={section.id}
 					section={section}
 					tasks={tasksBySection[section.id]}
 				/>
 			))}
-			<div className='flex'>
+			<div className='flex items-start'>
 				{isCreatingSection ? <div></div> : <Ghost placeholder='Add section' />}
 			</div>
 		</div>

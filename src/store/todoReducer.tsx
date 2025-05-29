@@ -33,18 +33,21 @@ export const initialState: TodoState = {
 		// Example section
 		{
 			id: '1',
-			title: 'Default Section',
+			title: 'Home',
 			color: '#3b82f6',
+			sort: 100,
 		},
 		{
 			id: '2',
 			title: 'Work',
 			color: '#10b981',
+			sort: 200,
 		},
 		{
 			id: '3',
 			title: 'Personal',
 			color: '#f59e0b',
+			sort: 300,
 		},
 	],
 	filter: 'all',
@@ -105,6 +108,7 @@ export default function todoReducer(
 				id: generateRandomId(),
 				title: action.payload.title,
 				color: action.payload.color,
+				sort: action.payload.sort,
 			};
 			return {
 				...state,
